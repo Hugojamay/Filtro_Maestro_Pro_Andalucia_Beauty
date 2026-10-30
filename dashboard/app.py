@@ -8,7 +8,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 # Configuración de la página con diseño moderno y ancho completo
 st.set_page_config(
     page_title="Andalucía Beauty | Panel Pro",
-    page_icon="✨",
+    page_icon="../logo.png",
     layout="wide",
     initial_sidebar_state="expanded",
 )
