@@ -1,0 +1,10 @@
+# Entorno virtual y credenciales
+.env
+__pycache__/
+.venv/
+env/
+venv/
+
+# Base de datos local y exportaciones
+data/*.db
+exports/
