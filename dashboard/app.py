@@ -206,7 +206,7 @@ elif menu == "🧠 Analizador y Escucha Social":
     else:
       st.error("Por favor, introduce un texto válido.")
 
-# --- MÓDULO 4: SOCIAL SELLING (MENSAJERÍA) ---
+#--- MÓDULO 4: SOCIAL SELLING (MENSAJERÍA) ---
 elif menu == "💬 Social Selling (Mensajería)":
   st.markdown("# 💬 Social Selling & Mensajería Personalizada")
   st.markdown(
@@ -218,6 +218,9 @@ elif menu == "💬 Social Selling (Mensajería)":
   col_s1, col_s2 = st.columns(2)
   with col_s1:
     contacto_nombre = st.text_input("👤 Nombre del Cliente / Prospecto", "María")
+    # NUEVO: Campo para el número de teléfono con lada
+    contacto_telefono = st.text_input("📱 Teléfono WhatsApp (Ej. 5233...)", placeholder="523312345678")
+    
     canal_contacto = st.selectbox(
         "Canal de Envío", ["WhatsApp", "Mensaje Directo (DM)", "SMS"]
     )
@@ -254,3 +257,22 @@ elif menu == "💬 Social Selling (Mensajería)":
         f"¡Mensaje preparado para {contacto_nombre} a través de"
         f" {canal_contacto} con éxito!"
     )
+
+  # NUEVO: Botón dinámico para abrir el chat de WhatsApp directamente
+  if canal_contacto == "WhatsApp":
+      st.markdown("---")
+      if contacto_telefono:
+          import urllib.parse
+          tel_limpio = "".join(filter(str.isdigit, contacto_telefono))
+          mensaje_codificado = urllib.parse.quote(mensaje_final)
+          link_wa = f"https://wa.me/{tel_limpio}?text={mensaje_codificado}"
+          
+          st.markdown(f"""
+          <a href="{link_wa}" target="_blank">
+              <button style="background-color:#25D366; color:white; padding:12px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; width:100%; font-size:16px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+                  💬 Abrir Chat Directo de WhatsApp con {contacto_nombre}
+              </button>
+          </a>
+          """, unsafe_allow_html=True)
+      else:
+          st.warning("⚠️ Escribe el número de teléfono en la parte superior para habilitar el botón de enlace directo a WhatsApp.")
