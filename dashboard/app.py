@@ -1,6 +1,9 @@
 import sqlite3
 import pandas as pd
 import streamlit as st
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 
 # Configuración de la página con diseño moderno y ancho completo
 st.set_page_config(
